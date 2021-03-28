@@ -14,6 +14,11 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
     y_pred = forward_prop(x, layer_sizes, activations)
     tf.add_to_collection('y_pred', y_pred)
     accuracy = calculate_accuracy(y, y_pred)
+    tf.add_to_collection('accuracy', accuracy)
+    loss = calculate_loss(y, y_pred)
+    tf.add_to_collection('loss', loss)
+    train_op = create_train_op(loss, alpha)
+    tf.add_to_collection('train_op', train_op)
 
     saver = tf.train.Saver()
     init = tf.global_variables_initializer()
@@ -46,6 +51,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
         accuracy_valid = sess.run(accuracy,
                                   feed_dict={x: X_valid, y: Y_valid})
         print("After {} iterations:".format(i))
+        print("\tTraining Cost: {}".format(loss_train))
+        print("\tTraining Accuracy: {}".format(accuracy_train))
         print("\tValidation Cost: {}".format(loss_valid))
         print("\tValidation Accuracy: {}".format(accuracy_valid))
         return saver.save(sess, save_path)
