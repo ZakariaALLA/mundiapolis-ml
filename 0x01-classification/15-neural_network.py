@@ -77,6 +77,9 @@ class NeuralNetwork:
         self.__b2 = self.b2 - (alpha * d__b2)
 
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+        """
+        The train function
+        """
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
