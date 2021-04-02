@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
+'''Neural Network'''
+
+
 import numpy as np
 
 
 class NeuralNetwork:
+    '''Neural Network class '''
+
     def __init__(self, nx, nodes):
+        '''  Neuron class  '''
+        
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -21,24 +28,30 @@ class NeuralNetwork:
 
     @property
     def W1(self):
+        ''' get W1 '''
         return self.__W1
 
     @property
     def b1(self):
+        ''' get b1 '''
         return self.__b1
 
     @property
     def A1(self):
+        ''' get A1 '''
         return self.__A1
 
     @property
     def W2(self):
+        ''' get W2 '''
         return self.__W2
 
     @property
     def b2(self):
+        ''' get b2 '''
         return self.__b2
 
     @property
     def A2(self):
+        ''' get A2 '''
         return self.__A2
