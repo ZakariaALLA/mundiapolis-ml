@@ -21,18 +21,20 @@ class Neuron:
 
     @property
     def W(self):
+        ''' get W '''
         return self.__W
 
     @property
     def b(self):
+        ''' get b '''
         return self.__b
 
     @property
     def A(self):
+        ''' get A '''
         return self.__A
 
     def forward_prop(self, X):
         x = np.matmul(self.__W, X) + self.__b
         self.__A = 1 / (1 + np.exp(-x))
         return self.__A
-
