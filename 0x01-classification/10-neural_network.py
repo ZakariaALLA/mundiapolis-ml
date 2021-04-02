@@ -1,9 +1,20 @@
 #!/usr/bin/env python3
+"""
+Module contenant la classe neurone
+"""
 import numpy as np
 
 
 class NeuralNetwork:
+    """
+    classification binaire
+    """
+
     def __init__(self, nx, nodes):
+        """
+        constructeur de la classe
+        la variable nx: est le nombre d'entités d'entrée du neurone
+        """
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -44,6 +55,9 @@ class NeuralNetwork:
         return self.__A2
 
     def forward_prop(self, X):
+        """
+        The function forward_prop
+        """
         z1 = np.matmul(self.W1, X) + self.b1
         self.__A1 = 1 / (1 + (np.exp(-z1)))
         z2 = np.matmul(self.W2, self.__A1) + self.b2
