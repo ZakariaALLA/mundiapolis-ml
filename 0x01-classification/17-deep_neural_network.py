@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DeepNeuralNetwork
+Deep Neural Network
 """
 
 
@@ -14,38 +14,49 @@ class DeepNeuralNetwork:
 
     def __init__(self, nx, layers):
         """
-        class Constructor
+        class constructor 
         """
+
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
-        if type(layers) is not list or len(layers) < 1:
+        self.nx = nx
+        if type(layers) is not list or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
+        self.__L = len(layers)
+        self.__cache = {}
         weights = {}
-        previous = nx
-        for index, layer in enumerate(layers, 1):
-            if type(layer) is not int or layer < 0:
+        for i in range(len(layers)):
+            if layers[i] < 1:
                 raise TypeError("layers must be a list of positive integers")
-            weights["b{}".format(index)] = np.zeros((layer, 1))
-            weights["W{}".format(index)] = (
-                np.random.randn(layer, previous) * np.sqrt(2 / previous))
-            previous = layer
-        self.L = len(layers)
-        self.cache = {}
-        self.weights = weights
+            key_w = 'W' + str(i + 1)
+            key_b = 'b' + str(i + 1)
+            if i == 0:
+                weights[key_w] = np.random.randn(layers[i], nx)*np.sqrt(2 / nx)
+            else:
+                weights[key_w] = np.random.randn(layers[i], layers[
+                    i-1]) * np.sqrt(2 / layers[i-1])
+            weights[key_b] = np.zeros((layers[i], 1))
+        self.__weights = weights
 
     @property
     def L(self):
-        ''' get L '''
-        return (self.__L)
+        """
+        function get L
+        """
+        return self.__L
 
     @property
     def cache(self):
-        ''' The cache function '''
-        return (self.__cache)
+        """
+        function get cache
+        """
+        return self.__cache
 
     @property
     def weights(self):
-        ''' The weights function '''
-        return (self.__weights)
+        """
+        function get weights
+        """
+        return self.__weights
