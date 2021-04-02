@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-"""  Neuron class  """
+"""  
+Neuron class  
+"""
+
 
 import numpy as np
 
 
 class Neuron:
-"""  class Constructor """
+    """  
+    class Constructor 
+    """
 
     def __init__(self, nx):
         if type(nx) is not int:
