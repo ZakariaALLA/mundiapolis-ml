@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """  
-Neuron class  
+Neuron  
 """
 
 
@@ -9,10 +9,13 @@ import numpy as np
 
 class Neuron:
     """  
-    class Constructor 
+    Neuron class  
     """
 
     def __init__(self, nx):
+        """  
+        class Constructor 
+        """
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
