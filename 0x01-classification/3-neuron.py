@@ -9,7 +9,7 @@ class Neuron:
     '''  Neuron class  '''
 
     def __init__(self, nx):
-        ''' class Constructor '''
+        '''  Neuron class  '''
 
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
