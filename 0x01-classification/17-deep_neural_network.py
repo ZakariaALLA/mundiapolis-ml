@@ -16,28 +16,23 @@ class DeepNeuralNetwork:
         """
         class constructor 
         """
-
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
-        self.nx = nx
-        if type(layers) is not list or len(layers) == 0:
+        if type(layers) is not list or len(layers) < 1:
             raise TypeError("layers must be a list of positive integers")
+        weights = {}
+        previous = nx
+        for index, layer in enumerate(layers, 1):
+            if type(layer) is not int or layer < 0:
+                raise TypeError("layers must be a list of positive integers")
+            weights["b{}".format(index)] = np.zeros((layer, 1))
+            weights["W{}".format(index)] = (
+                np.random.randn(layer, previous) * np.sqrt(2 / previous))
+            previous = layer
         self.__L = len(layers)
         self.__cache = {}
-        weights = {}
-        for i in range(len(layers)):
-            if layers[i] < 1:
-                raise TypeError("layers must be a list of positive integers")
-            key_w = 'W' + str(i + 1)
-            key_b = 'b' + str(i + 1)
-            if i == 0:
-                weights[key_w] = np.random.randn(layers[i], nx)*np.sqrt(2 / nx)
-            else:
-                weights[key_w] = np.random.randn(layers[i], layers[
-                    i-1]) * np.sqrt(2 / layers[i-1])
-            weights[key_b] = np.zeros((layers[i], 1))
         self.__weights = weights
 
     @property
@@ -45,18 +40,18 @@ class DeepNeuralNetwork:
         """
         function get L
         """
-        return self.__L
+        return (self.__L)
 
     @property
     def cache(self):
         """
         function get cache
         """
-        return self.__cache
+        return (self.__cache)
 
     @property
     def weights(self):
         """
         function get weights
         """
-        return self.__weights
+        return (self.__weights)
