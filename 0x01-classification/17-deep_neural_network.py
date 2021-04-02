@@ -37,21 +37,15 @@ class DeepNeuralNetwork:
 
     @property
     def L(self):
-        """
-        function get L
-        """
+        ''' get L '''
         return (self.__L)
 
     @property
     def cache(self):
-        """
-        function get cache
-        """
+        ''' get cache '''
         return (self.__cache)
 
     @property
     def weights(self):
-        """
-        function get weights
-        """
+        ''' get weights '''
         return (self.__weights)
