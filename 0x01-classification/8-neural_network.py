@@ -9,8 +9,8 @@ class NeuralNetwork:
     '''Neural Network class '''
 
     def __init__(self, nx, nodes):
-        '''  Neuron class  '''
-        
+        '''  Neural Network constructor  '''
+
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
