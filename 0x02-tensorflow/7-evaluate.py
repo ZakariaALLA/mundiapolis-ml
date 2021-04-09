@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Evaluation
+Defines the function evaluate that evaluates output of
+neural network classifier
 """
 
 
@@ -9,7 +10,7 @@ import tensorflow as tf
 
 def evaluate(X, Y, save_path):    
     """
-    Defines the function evaluate
+    Evaluates output of neural network
     """
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(save_path + '.meta')
