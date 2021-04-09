@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
+"""
+Evaluation
+"""
+
+
 import tensorflow as tf
 
 
-def evaluate(X, Y, save_path):
+def evaluate(X, Y, save_path):    
+    """
+    Defines the function evaluate
+    """
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(save_path + '.meta')
         saver.restore(sess, save_path)
