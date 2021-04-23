@@ -3,7 +3,6 @@
 Defines the function that calculates the sensitivity
 """
 
-
 import numpy as np
 
 
