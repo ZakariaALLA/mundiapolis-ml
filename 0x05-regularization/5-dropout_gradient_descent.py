@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-Defines the function that updates the weights and biases
+Defines function that updates the weights with Dropout regularization
+using gradient descent
 """
 
 import numpy as np
 
 
-def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
+def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """
-    Updates weights and biases using gradient descent with L2 regularization
+    Updates the weights with Dropout regularization using gradient descent
     """
     m = Y.shape[1]
     back = {}
@@ -16,19 +17,20 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         A = cache["A{}".format(index - 1)]
         if index == L:
             back["dz{}".format(index)] = (cache["A{}".format(index)] - Y)
+            dz = back["dz{}".format(index)]
+
         else:
             dz_prev = back["dz{}".format(index + 1)]
             A_current = cache["A{}".format(index)]
             back["dz{}".format(index)] = (
                 np.matmul(W_prev.transpose(), dz_prev) *
                 (A_current * (1 - A_current)))
-        dz = back["dz{}".format(index)]
-        dW = (1 / m) * (
-            (np.matmul(dz, A.transpose())) + (
-                lambtha * weights["W{}".format(index)]))
-        db = (1 / m) * (
-            (np.sum(dz, axis=1, keepdims=True)) + (
-                lambtha * weights["b{}".format(index)]))
+            dz = back["dz{}".format(index)]
+            dz *= cache["D{}".format(index)]
+            dz /= keep_prob
+
+        dW = (1 / m) * (np.matmul(dz, A.transpose()))
+        db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
         W_prev = weights["W{}".format(index)]
         weights["W{}".format(index)] = (
             weights["W{}".format(index)] - (alpha * dW))
