@@ -8,7 +8,7 @@ import numpy as np
 
 def sensitivity(confusion):
     """
-    Calculates the sensitivity 
+    Calculates the sensitivity for each class in a confusion matrix
     """
     classes = confusion.shape[0]
     sensitivity = []
